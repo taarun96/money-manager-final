@@ -5,7 +5,6 @@ import cors from 'cors';
 
 const url =
   'mongodb+srv://taarun:woMnG1loki9SOH8i@cluster0.wkhik.mongodb.net/moneytrackerdatabase?retryWrites=true&w=majority';
-
 mongoose.connect(url, { useNewUrlParser: true });
 const con = mongoose.connection;
 

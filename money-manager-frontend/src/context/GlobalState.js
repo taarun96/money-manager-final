@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer.js';
-import axios from 'axios';
+import api from './axios';
 const initialState = {
   transactions: [],
   error: null,
@@ -14,7 +14,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function getTransactions() {
     try {
-      const res = await axios.get('/transactions');
+      const res = await api.get('/transactions');
 
       dispatch({
         type: 'GET_TRANSACTIONS',
@@ -23,14 +23,13 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: err.response.data.error,
       });
     }
   }
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`/transactions/${id}`);
+      await api.delete(`/transactions/${id}`);
 
       dispatch({
         type: 'DELETE_TRANSACTION',
@@ -52,7 +51,7 @@ export const GlobalProvider = ({ children }) => {
     };
 
     try {
-      const res = await axios.post('/transactions', transaction, config);
+      const res = await api.post('/transactions', transaction, config);
 
       dispatch({
         type: 'ADD_TRANSACTION',
